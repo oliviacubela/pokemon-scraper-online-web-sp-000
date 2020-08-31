@@ -22,12 +22,15 @@ class Pokemon
     db.execute("INSERT INTO pokemon (name, type) VALUES (?, ?);", name, type)
   end
 
+  # def self.find(id, db)
+  #   sql = <<-SQL
+  #     SELECT * FROM pokemon WHERE id = (?);
+  #   SQL
+  #   pokemon = db.execute(sql, [id]).flatten
+  #
+  #   Pokemon.new(name, type, db)
+  # end
   def self.find(id, db)
-    sql = <<-SQL
-      SELECT * FROM pokemon WHERE id = (?);
-    SQL
-    pokemon = db.execute(sql, [id]).flatten
-
-    Pokemon.new(name, type, db)
+    db.execute("SELECT * FROM pokemon WHERE id = ?;", id).flatten
   end
 end
